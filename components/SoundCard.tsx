@@ -1,7 +1,9 @@
 import { Image } from "expo-image";
+import { useState } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Spacing, Colors } from "../styles";
 import { FONT_WEIGHT_REGULAR } from "../styles/typography";
+import CustomSlider from "./CustomSlider";
 
 export type Props = {
   name: string;
@@ -9,6 +11,7 @@ export type Props = {
 };
 
 const SoundCard: React.FC<Props> = ({ name }) => {
+  const [isVolumeOn, setIsVolumeOn] = useState(false);
   return (
     <View style={styles.card}>
       <View>
@@ -17,14 +20,19 @@ const SoundCard: React.FC<Props> = ({ name }) => {
       <View style={styles.audioContainer}>
         <Pressable
           style={styles.audioButton}
-          onPress={() => console.log("Clicked")}
+          onPress={() => setIsVolumeOn(!isVolumeOn)}
         >
           <Image
             style={styles.buttonIcon}
             contentFit="contain"
-            source={require("../assets/images/volume-on.svg")}
+            source={
+              isVolumeOn
+                ? require("../assets/images/volume-on.svg")
+                : require("../assets/images/volume-off.svg")
+            }
           />
         </Pressable>
+        <CustomSlider />
       </View>
     </View>
   );
@@ -40,6 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     display: "flex",
     flexDirection: "column",
+    marginBottom: Spacing.SCALE_8,
   },
   cardHeading: {
     fontSize: 40,
@@ -50,6 +59,7 @@ const styles = StyleSheet.create({
   },
   audioContainer: {
     display: "flex",
+    flexDirection: "row",
     marginHorizontal: Spacing.SCALE_8,
     borderRadius: 12,
   },

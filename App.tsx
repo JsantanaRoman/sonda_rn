@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, View, Platform, ScrollView } from "react-native";
 import { Colors, Spacing } from "./styles";
 import SoundCard from "./components/SoundCard";
+import { SoundCardBaseList } from "./utils/constants";
 
 const App = () => {
   return (
@@ -28,7 +29,9 @@ const App = () => {
         </View>
       </View>
       <ScrollView style={styles.container}>
-        <SoundCard name="Coqui" />
+        {SoundCardBaseList.map((prop, key) => {
+          return <SoundCard name={prop.name} key={key} />;
+        })}
       </ScrollView>
     </>
   );
