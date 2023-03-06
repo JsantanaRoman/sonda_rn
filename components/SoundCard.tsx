@@ -4,14 +4,31 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Spacing, Colors } from "../styles";
 import { FONT_WEIGHT_REGULAR } from "../styles/typography";
 import CustomSlider from "./CustomSlider";
+import { Audio } from "expo-av";
 
 export type Props = {
   name: string;
   index?: number;
+  soundPath: string;
 };
 
-const SoundCard: React.FC<Props> = ({ name }) => {
+const SoundCard: React.FC<Props> = ({ name, soundPath }) => {
   const [isVolumeOn, setIsVolumeOn] = useState(false);
+
+  const playSound = async () => {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../assets/audio/gallo.mp3")
+    );
+    await sound.playAsync();
+  };
+
+  const stopSound = async () => {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../assets/audio/gallo.mp3")
+    );
+    sound.unloadAsync();
+  };
+
   return (
     <View style={styles.card}>
       <View>
@@ -20,7 +37,10 @@ const SoundCard: React.FC<Props> = ({ name }) => {
       <View style={styles.audioContainer}>
         <Pressable
           style={styles.audioButton}
-          onPress={() => setIsVolumeOn(!isVolumeOn)}
+          onPress={async () => {
+            setIsVolumeOn(!isVolumeOn);
+            !isVolumeOn ? playSound() : stopSound();
+          }}
         >
           <Image
             style={styles.buttonIcon}

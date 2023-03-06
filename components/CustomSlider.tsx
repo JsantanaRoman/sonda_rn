@@ -10,6 +10,7 @@ const CustomSlider = () => {
     <View style={styles.container}>
       <Slider
         value={volume}
+        // TODO: Revisit Slider Value Implementation ( Number | Array<Number>)
         // @ts-ignore
         onSlidingComplete={(value: number) => {
           console.log(value);

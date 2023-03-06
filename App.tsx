@@ -4,8 +4,13 @@ import { StyleSheet, View, Platform, ScrollView } from "react-native";
 import { Colors, Spacing } from "./styles";
 import SoundCard from "./components/SoundCard";
 import { SoundCardBaseList } from "./utils/constants";
+import { Audio } from "expo-av";
 
 const App = () => {
+  // Request audio permission
+  Audio.requestPermissionsAsync();
+  Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+
   return (
     <>
       <StatusBar backgroundColor={Colors.BLACK} style="light" />
@@ -30,7 +35,9 @@ const App = () => {
       </View>
       <ScrollView style={styles.container}>
         {SoundCardBaseList.map((prop, key) => {
-          return <SoundCard name={prop.name} key={key} />;
+          return (
+            <SoundCard name={prop.name} key={key} soundPath={prop.soundPath} />
+          );
         })}
       </ScrollView>
     </>
@@ -47,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
-    paddingHorizontal: Spacing.SCALE_16,
+    padding: Spacing.SCALE_16,
   },
   headingRight: {
     display: "flex",
@@ -63,6 +70,7 @@ const styles = StyleSheet.create({
   headerLogo: {
     height: 41,
     width: 27,
+    paddingBottom: Spacing.SCALE_16,
   },
   container: {
     backgroundColor: Colors.BLACK,
