@@ -10,9 +10,10 @@ export type Props = {
   name: string;
   index?: number;
   soundPath: string;
+  purchased: boolean;
 };
 
-const SoundCard: React.FC<Props> = ({ name, soundPath }) => {
+const SoundCard: React.FC<Props> = ({ name, purchased }) => {
   const [isVolumeOn, setIsVolumeOn] = useState(false);
 
   const playSound = async () => {
@@ -30,29 +31,46 @@ const SoundCard: React.FC<Props> = ({ name, soundPath }) => {
   };
 
   return (
-    <View style={styles.card}>
-      <View>
-        <Text style={styles.cardHeading}>{name}</Text>
-      </View>
-      <View style={styles.audioContainer}>
-        <Pressable
-          style={styles.audioButton}
-          onPress={async () => {
-            setIsVolumeOn(!isVolumeOn);
-            !isVolumeOn ? playSound() : stopSound();
-          }}
-        >
-          <Image
-            style={styles.buttonIcon}
-            contentFit="contain"
-            source={
-              isVolumeOn
-                ? require("../assets/images/volume-on.svg")
-                : require("../assets/images/volume-off.svg")
-            }
-          />
-        </Pressable>
-        <CustomSlider />
+    <View>
+      {!purchased && (
+        <>
+          <Pressable
+            style={styles.lockContainer}
+            onPress={() => console.log("Modal PopUp")}
+          >
+            <Image
+              style={styles.lockIcon}
+              contentFit="contain"
+              source={require("../assets/images/lock.svg")}
+            />
+          </Pressable>
+          <View style={styles.locked}></View>
+        </>
+      )}
+      <View style={styles.card}>
+        <View>
+          <Text style={styles.cardHeading}>{name}</Text>
+        </View>
+        <View style={styles.audioContainer}>
+          <Pressable
+            style={styles.audioButton}
+            onPress={async () => {
+              setIsVolumeOn(!isVolumeOn);
+              !isVolumeOn ? playSound() : stopSound();
+            }}
+          >
+            <Image
+              style={styles.buttonIcon}
+              contentFit="contain"
+              source={
+                isVolumeOn
+                  ? require("../assets/images/volume-on.svg")
+                  : require("../assets/images/volume-off.svg")
+              }
+            />
+          </Pressable>
+          <CustomSlider />
+        </View>
       </View>
     </View>
   );
@@ -97,5 +115,34 @@ const styles = StyleSheet.create({
     width: 21,
     height: 17,
   },
-  audioSlider: {},
+  locked: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    zIndex: 1,
+    opacity: 0.8,
+    backgroundColor: Colors.BLACK,
+    height: 125,
+    width: "100%",
+    borderRadius: 12,
+  },
+  lockContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    zIndex: 2,
+    height: 48,
+    width: 48,
+    borderRadius: 50,
+    position: "absolute",
+    backgroundColor: Colors.BLACK,
+    margin: "auto",
+    top: 62.5,
+  },
+  lockIcon: {
+    height: 26,
+    width: 20,
+    zIndex: 3,
+  },
 });

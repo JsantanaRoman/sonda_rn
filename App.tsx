@@ -36,7 +36,12 @@ const App = () => {
       <ScrollView style={styles.container}>
         {SoundCardBaseList.map((prop, key) => {
           return (
-            <SoundCard name={prop.name} key={key} soundPath={prop.soundPath} />
+            <SoundCard
+              name={prop.name}
+              key={key}
+              soundPath={prop.soundPath}
+              purchased={prop.purchased}
+            />
           );
         })}
       </ScrollView>
