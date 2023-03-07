@@ -1,10 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
-import { StyleSheet, View, Platform, ScrollView } from "react-native";
+import * as Haptics from "expo-haptics";
+import { Audio } from "expo-av";
+import {
+  StyleSheet,
+  View,
+  Platform,
+  ScrollView,
+  Pressable,
+} from "react-native";
 import { Colors, Spacing } from "./styles";
 import SoundCard from "./components/SoundCard";
-import { SoundCardBaseList } from "./utils/constants";
-import { Audio } from "expo-av";
+import { SoundList } from "./utils/constants";
 
 const App = () => {
   // Request audio permission
@@ -21,26 +28,38 @@ const App = () => {
           contentFit="contain"
         ></Image>
         <View style={styles.headingRight}>
-          <Image
-            style={styles.headerIcons}
-            source={require("./assets/images/hamburger.svg")}
-            contentFit="contain"
-          ></Image>
-          <Image
-            style={[styles.headerIcons, { marginLeft: Spacing.SCALE_24 }]}
-            source={require("./assets/images/settings.svg")}
-            contentFit="contain"
-          ></Image>
+          <Pressable
+            onPress={() =>
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+            }
+          >
+            <Image
+              style={styles.headerIcons}
+              source={require("./assets/images/hamburger.svg")}
+              contentFit="contain"
+            ></Image>
+          </Pressable>
+          <Pressable
+            onPress={() =>
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+            }
+          >
+            <Image
+              style={[styles.headerIcons, { marginLeft: Spacing.SCALE_24 }]}
+              source={require("./assets/images/settings.svg")}
+              contentFit="contain"
+            ></Image>
+          </Pressable>
         </View>
       </View>
       <ScrollView style={styles.container}>
-        {SoundCardBaseList.map((prop, key) => {
+        {SoundList.map((prop, key) => {
           return (
             <SoundCard
               name={prop.name}
               key={key}
               soundPath={prop.soundPath}
-              purchased={prop.purchased}
+              available={prop.available}
             />
           );
         })}

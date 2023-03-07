@@ -1,42 +1,43 @@
 import { Image } from "expo-image";
+import { Audio } from "expo-av";
+import * as Haptics from "expo-haptics";
 import { useState } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Spacing, Colors } from "../styles";
 import { FONT_WEIGHT_REGULAR } from "../styles/typography";
 import CustomSlider from "./CustomSlider";
-import { Audio } from "expo-av";
 
 export type Props = {
   name: string;
   index?: number;
-  soundPath: string;
-  purchased: boolean;
+  soundPath: NodeRequire;
+  available: boolean;
 };
 
-const SoundCard: React.FC<Props> = ({ name, purchased }) => {
+const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
   const [isVolumeOn, setIsVolumeOn] = useState(false);
 
   const playSound = async () => {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../assets/audio/gallo.mp3")
-    );
+    const { sound } = await Audio.Sound.createAsync(soundPath);
     await sound.playAsync();
   };
 
   const stopSound = async () => {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../assets/audio/gallo.mp3")
-    );
+    const { sound } = await Audio.Sound.createAsync(soundPath);
+    await sound.pauseAsync();
     sound.unloadAsync();
   };
 
   return (
     <View>
-      {!purchased && (
+      {!available && (
         <>
           <Pressable
             style={styles.lockContainer}
-            onPress={() => console.log("Modal PopUp")}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              console.log("Modal PopUp");
+            }}
           >
             <Image
               style={styles.lockIcon}
@@ -55,6 +56,7 @@ const SoundCard: React.FC<Props> = ({ name, purchased }) => {
           <Pressable
             style={styles.audioButton}
             onPress={async () => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               setIsVolumeOn(!isVolumeOn);
               !isVolumeOn ? playSound() : stopSound();
             }}
