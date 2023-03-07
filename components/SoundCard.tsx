@@ -4,8 +4,8 @@ import * as Haptics from "expo-haptics";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Spacing, Colors } from "../styles";
 import { FONT_WEIGHT_REGULAR } from "../styles/typography";
-import CustomSlider from "./CustomSlider";
 import { useRef, useState } from "react";
+import { Slider } from "@miblanchard/react-native-slider";
 
 export type Props = {
   name: string;
@@ -16,12 +16,15 @@ export type Props = {
 
 const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
   const [playing, setPlaying] = useState(false);
+  const [volume, setVolume] = useState(0);
   const sound = useRef(new Audio.Sound());
 
   const PlayAudio = async () => {
     await sound.current.loadAsync(soundPath);
     sound.current.playAsync();
     sound.current.setStatusAsync({ isLooping: true });
+    // TODO: Move this logic to component level
+    sound.current.setStatusAsync({ volume: volume });
     setPlaying(true);
   };
 
@@ -73,7 +76,22 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
               }
             />
           </Pressable>
-          <CustomSlider />
+          <View style={styles.sliderContainer}>
+            <Slider
+              value={volume}
+              // @ts-ignore
+              onValueChange={(value: Array<number>) => {
+                setVolume(Number(value[0]));
+              }}
+              animateTransitions={true}
+              trackStyle={styles.trackStyle}
+              minimumTrackTintColor={Colors.PRIMARY}
+              maximumTrackTintColor={"#242424"}
+              thumbStyle={styles.thumbStyle}
+              minimumValue={0}
+              maximumValue={1}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -114,6 +132,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 12,
+  },
+  sliderContainer: {
+    flex: 1,
+    marginRight: Spacing.SCALE_8,
+    alignItems: "stretch",
+    justifyContent: "center",
+  },
+  trackStyle: {
+    height: 47,
+    borderRadius: 12,
+  },
+  thumbStyle: {
+    backgroundColor: "transparent",
   },
   buttonIcon: {
     width: 21,
