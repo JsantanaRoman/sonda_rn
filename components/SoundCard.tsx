@@ -1,11 +1,11 @@
 import { Image } from "expo-image";
 import { Audio } from "expo-av";
 import * as Haptics from "expo-haptics";
-import { useState } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Spacing, Colors } from "../styles";
 import { FONT_WEIGHT_REGULAR } from "../styles/typography";
 import CustomSlider from "./CustomSlider";
+import { useRef, useState } from "react";
 
 export type Props = {
   name: string;
@@ -15,17 +15,20 @@ export type Props = {
 };
 
 const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
-  const [isVolumeOn, setIsVolumeOn] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const sound = useRef(new Audio.Sound());
 
-  const playSound = async () => {
-    const { sound } = await Audio.Sound.createAsync(soundPath);
-    await sound.playAsync();
+  const PlayAudio = async () => {
+    await sound.current.loadAsync(soundPath);
+    sound.current.playAsync();
+    sound.current.setStatusAsync({ isLooping: true });
+    setPlaying(true);
   };
 
-  const stopSound = async () => {
-    const { sound } = await Audio.Sound.createAsync(soundPath);
-    await sound.pauseAsync();
-    sound.unloadAsync();
+  const PauseAudio = async () => {
+    sound.current.pauseAsync();
+    await sound.current.unloadAsync();
+    setPlaying(false);
   };
 
   return (
@@ -57,15 +60,14 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
             style={styles.audioButton}
             onPress={async () => {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              setIsVolumeOn(!isVolumeOn);
-              !isVolumeOn ? playSound() : stopSound();
+              playing ? PauseAudio() : PlayAudio();
             }}
           >
             <Image
               style={styles.buttonIcon}
               contentFit="contain"
               source={
-                isVolumeOn
+                playing
                   ? require("../assets/images/volume-on.svg")
                   : require("../assets/images/volume-off.svg")
               }
