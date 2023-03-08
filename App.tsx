@@ -1,25 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
-import * as Haptics from "expo-haptics";
 import { Audio } from "expo-av";
-import {
-  StyleSheet,
-  View,
-  Platform,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { StyleSheet, View, Platform, ScrollView } from "react-native";
 import { Colors, Spacing } from "./styles";
 import SoundCard from "./components/SoundCard";
 import { SoundList } from "./utils/constants";
+import IconButton from "./components/IconButton";
 // test
 const App = () => {
+  // TODO: Create Global Config File
   // Request audio permission
   Audio.requestPermissionsAsync();
   Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
 
+  // TODO: Create and Move to home screen
   return (
-    <>
+    <View style={{ flex: 1 }}>
       <StatusBar backgroundColor={Colors.BLACK} style="light" />
       <View style={styles.heading}>
         <Image
@@ -28,28 +24,16 @@ const App = () => {
           contentFit="contain"
         ></Image>
         <View style={styles.headingRight}>
-          <Pressable
-            onPress={() =>
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-            }
-          >
-            <Image
-              style={styles.headerIcons}
-              source={require("./assets/images/hamburger.svg")}
-              contentFit="contain"
-            ></Image>
-          </Pressable>
-          <Pressable
-            onPress={() =>
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-            }
-          >
-            <Image
-              style={[styles.headerIcons, { marginLeft: Spacing.SCALE_24 }]}
-              source={require("./assets/images/settings.svg")}
-              contentFit="contain"
-            ></Image>
-          </Pressable>
+          <IconButton
+            iconPath={require("./assets/images/hamburger.svg")}
+            iconStyle={styles.headerIcons}
+            contentFit={"contain"}
+          />
+          <IconButton
+            iconPath={require("./assets/images/settings.svg")}
+            iconStyle={[styles.headerIcons, { marginLeft: Spacing.SCALE_24 }]}
+            contentFit={"contain"}
+          />
         </View>
       </View>
       <ScrollView style={styles.container}>
@@ -64,7 +48,13 @@ const App = () => {
           );
         })}
       </ScrollView>
-    </>
+      <IconButton
+        iconPath={require("./assets/images/play.svg")}
+        containerStyle={styles.playButtonContainer}
+        iconStyle={styles.playButton}
+        contentFit={"contain"}
+      />
+    </View>
   );
 };
 
@@ -100,5 +90,22 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BLACK,
     color: Colors.PRIMARY,
     padding: Spacing.SCALE_16,
+  },
+  playButtonContainer: {
+    borderRadius: 50,
+    height: 57,
+    width: 57,
+    backgroundColor: "#61616166",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    bottom: 42,
+    right: 16,
+    zIndex: 2,
+  },
+  playButton: {
+    height: 17,
+    width: 17,
   },
 });

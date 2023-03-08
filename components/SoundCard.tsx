@@ -4,7 +4,7 @@ import * as Haptics from "expo-haptics";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Spacing, Colors } from "../styles";
 import { FONT_WEIGHT_REGULAR } from "../styles/typography";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Slider } from "@miblanchard/react-native-slider";
 
 export type Props = {
@@ -19,14 +19,21 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
   const [volume, setVolume] = useState(0);
   const sound = useRef(new Audio.Sound());
 
-  const PlayAudio = async () => {
+  useEffect(() => {
+    loadAudio();
+  }, []);
+
+  const loadAudio = async () => {
     await sound.current.loadAsync(soundPath);
+  };
+
+  const playAudio = async () => {
     sound.current.playAsync();
     sound.current.setStatusAsync({ isLooping: true });
     setPlaying(true);
   };
 
-  const PauseAudio = async () => {
+  const pauseAudio = async () => {
     sound.current.pauseAsync();
     await sound.current.unloadAsync();
     setPlaying(false);
@@ -61,7 +68,7 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
             style={styles.audioButton}
             onPress={async () => {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              playing ? PauseAudio() : PlayAudio();
+              playing ? pauseAudio() : playAudio();
             }}
           >
             <Image
