@@ -23,8 +23,6 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
     await sound.current.loadAsync(soundPath);
     sound.current.playAsync();
     sound.current.setStatusAsync({ isLooping: true });
-    // TODO: Move this logic to component level
-    sound.current.setStatusAsync({ volume: volume });
     setPlaying(true);
   };
 
@@ -81,6 +79,8 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
               value={volume}
               // @ts-ignore
               onValueChange={(value: Array<number>) => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                sound.current.setStatusAsync({ volume: value[0] });
                 setVolume(Number(value[0]));
               }}
               animateTransitions={true}
