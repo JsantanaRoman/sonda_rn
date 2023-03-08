@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/images/icon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "97751974-7a79-497c-a868-01a75bda982b"
+      }
+    },
+    "owner": "jsantana93"
   }
 }
