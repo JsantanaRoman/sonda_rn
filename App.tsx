@@ -12,7 +12,7 @@ import {
 import { Colors, Spacing } from "./styles";
 import SoundCard from "./components/SoundCard";
 import { SoundList } from "./utils/constants";
-
+// test
 const App = () => {
   // Request audio permission
   Audio.requestPermissionsAsync();
