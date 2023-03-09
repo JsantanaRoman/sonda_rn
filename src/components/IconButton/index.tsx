@@ -1,5 +1,4 @@
-import { Pressable, StyleProp, ViewStyle } from "react-native";
-import * as Haptics from "expo-haptics";
+import { Pressable, ViewStyle } from "react-native";
 import { Image, ImageContentFit, ImageSource, ImageStyle } from "expo-image";
 
 export type Props = {
