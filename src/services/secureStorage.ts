@@ -13,11 +13,3 @@ export const deleteFromLocalStorage = async (key: string) => {
   let result = await SecureStore.deleteItemAsync(key);
   return result;
 };
-
-/*
-Local Storage Possible Uses:
- isMember - Store if the user has a memberShip
- MembershipType - Store the type of membership
- MembershipDate - Date Membership was active / usef for Membership renewall logic if MembershipType = "Supporter"
- ActivePlaylist - If we want to have the users selected playlist as the sounds to show in the home screen.
-*/
