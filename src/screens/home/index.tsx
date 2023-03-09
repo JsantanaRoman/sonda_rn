@@ -5,11 +5,22 @@ import { Colors, Spacing } from "../../styles";
 import { SoundList } from "../../utils/constants";
 import IconButton from "../../components/IconButton";
 import * as Haptics from "expo-haptics";
-import Message from "../../components/message";
 import SoundCard from "../../components/SoundCard";
 import styles from "./style";
+//  Redux
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { setPlayAll } from "../../store/playAll";
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+  const { playAll } = useSelector((state: RootState) => state.playAll);
+
+  const handlePress = () => {
+    dispatch(setPlayAll(!playAll));
+    console.log("PlayAll: ", playAll);
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor={Colors.BLACK} style="light" />
@@ -38,7 +49,6 @@ const HomeScreen = () => {
           />
         </View>
       </View>
-      <Message />
       <ScrollView style={styles.container}>
         {SoundList.map((prop, key) => {
           return (
@@ -56,6 +66,7 @@ const HomeScreen = () => {
         containerStyle={styles.playButtonContainer}
         iconStyle={styles.playButton}
         contentFit={"contain"}
+        onPress={handlePress}
       />
     </View>
   );

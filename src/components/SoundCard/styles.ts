@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     opacity: 0.8,
     backgroundColor: Colors.BLACK,
+    tintColor: "red",
     height: 125,
     width: "100%",
     borderRadius: 12,

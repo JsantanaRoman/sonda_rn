@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import messageReducer from "./message";
+import playAllReducer from "./playAll";
 
 export const store = configureStore({
   reducer: {
-    message: messageReducer,
+    playAll: playAllReducer,
   },
 });
 
