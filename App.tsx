@@ -6,6 +6,8 @@ import { Colors, Spacing } from "./styles";
 import SoundCard from "./components/SoundCard";
 import { SoundList } from "./utils/constants";
 import IconButton from "./components/IconButton";
+import * as Haptics from "expo-haptics";
+
 // test
 const App = () => {
   // TODO: Create Global Config File
@@ -28,11 +30,17 @@ const App = () => {
             iconPath={require("./assets/images/hamburger.svg")}
             iconStyle={styles.headerIcons}
             contentFit={"contain"}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            }}
           />
           <IconButton
             iconPath={require("./assets/images/settings.svg")}
             iconStyle={[styles.headerIcons, { marginLeft: Spacing.SCALE_24 }]}
             contentFit={"contain"}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            }}
           />
         </View>
       </View>

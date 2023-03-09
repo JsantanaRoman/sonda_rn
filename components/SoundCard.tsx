@@ -86,7 +86,6 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
               value={volume}
               // @ts-ignore
               onValueChange={(value: Array<number>) => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                 sound.current.setStatusAsync({ volume: value[0] });
                 setVolume(Number(value[0]));
               }}
