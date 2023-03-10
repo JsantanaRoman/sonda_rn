@@ -1,6 +1,6 @@
 import { Audio } from "expo-av";
 import { Provider } from "react-redux";
-import { store } from "../sonda/src/store";
+import { store } from "./src/store/";
 import HomeScreen from "./src/screens/home";
 
 const App = () => {
