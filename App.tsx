@@ -4,6 +4,7 @@ import { store } from "../sonda/src/store";
 import HomeScreen from "./src/screens/home";
 
 const App = () => {
+  // Testing Preview
   // TODO: Create Global Config File
   // Request audio permission
   Audio.requestPermissionsAsync();
