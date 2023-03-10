@@ -8,11 +8,6 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Check for EXPO_TOKEN
-        run: |
-          if [ -z "${{ secrets.EXPO_TOKEN }}" ];
-            exit 1
-          fi
 
       - name: Checkout repository
         uses: actions/checkout@v3
