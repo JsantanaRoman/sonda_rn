@@ -1,16 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import { Image } from "expo-image";
-import { View, ScrollView } from "react-native";
-import { Colors, Spacing } from "../../styles";
-import { SoundList } from "../../utils/constants";
-import IconButton from "../../components/IconButton";
 import * as Haptics from "expo-haptics";
-import SoundCard from "../../components/SoundCard";
-import styles from "./style";
-//  Redux
+import { Image } from "expo-image";
+import { StatusBar } from "expo-status-bar";
+import { ScrollView, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { IconButton, SoundCard } from "_components";
+import { RootState } from "_store";
+import { Colors, Spacing } from "_styles";
+import { Constants } from "_utils";
 import { setPlayAll } from "../../store/playAll";
+import styles from "./style";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -27,12 +25,12 @@ const HomeScreen = () => {
       <View style={styles.heading}>
         <Image
           style={styles.headerLogo}
-          source={require("../../../assets/images/logo.svg")}
+          source={require("../../assets/images/logo.svg")}
           contentFit="contain"
         ></Image>
         <View style={styles.headingRight}>
           <IconButton
-            iconPath={require("../../../assets/images/hamburger.svg")}
+            iconPath={require("../../assets/images/hamburger.svg")}
             iconStyle={styles.headerIcons}
             contentFit={"contain"}
             onPress={() => {
@@ -40,7 +38,7 @@ const HomeScreen = () => {
             }}
           />
           <IconButton
-            iconPath={require("../../../assets/images/settings.svg")}
+            iconPath={require("../../assets/images/settings.svg")}
             iconStyle={[styles.headerIcons, { marginLeft: Spacing.SCALE_24 }]}
             contentFit={"contain"}
             onPress={() => {
@@ -50,7 +48,7 @@ const HomeScreen = () => {
         </View>
       </View>
       <ScrollView style={styles.container}>
-        {SoundList.map((prop, key) => {
+        {Constants.SoundList.map((prop, key) => {
           return (
             <SoundCard
               name={prop.name}
@@ -62,7 +60,7 @@ const HomeScreen = () => {
         })}
       </ScrollView>
       <IconButton
-        iconPath={require("../../../assets/images/play.svg")}
+        iconPath={require("../../assets/images/play.svg")}
         containerStyle={styles.playButtonContainer}
         iconStyle={styles.playButton}
         contentFit={"contain"}

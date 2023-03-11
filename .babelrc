@@ -1,0 +1,22 @@
+{
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "cwd": "babelrc",
+          "root": ["./src"],
+          "extensions": [".ts",".tsx"],
+          "alias": {
+            "_assets": "./src/assets",
+            "_components": "./src/components",
+            "_navigations": "./src/navigations",
+            "_screens": "./src/screens",
+            "_services": "./src/services",
+            "_store": "./src/store",
+            "_styles": "./src/styles",
+            "_utils": "./src/utils"
+          }
+        }
+      ]
+    ]
+  }

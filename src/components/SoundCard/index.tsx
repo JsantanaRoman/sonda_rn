@@ -1,16 +1,16 @@
-import { Image } from "expo-image";
-import { Audio } from "expo-av";
-import * as Haptics from "expo-haptics";
-import { View, Text, Pressable } from "react-native";
-import { Colors } from "../../styles";
-import { useEffect, useRef, useState } from "react";
 import { Slider } from "@miblanchard/react-native-slider";
+import { Audio, AVPlaybackSource } from "expo-av";
+import * as Haptics from "expo-haptics";
+import { Image } from "expo-image";
+import { useEffect, useRef, useState } from "react";
+import { Pressable, Text, View } from "react-native";
+import { Colors } from "_styles";
 import styles from "./styles";
 
 export type Props = {
   name: string;
   index?: number;
-  soundPath: NodeRequire;
+  soundPath: AVPlaybackSource;
   available: boolean;
 };
 
@@ -53,7 +53,7 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
             <Image
               style={styles.lockIcon}
               contentFit="contain"
-              source={require("../../../assets/images/lock.svg")}
+              source={require("../../assets/images/lock.svg")}
             />
           </Pressable>
           <View style={styles.locked}></View>
@@ -76,8 +76,8 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
               contentFit="contain"
               source={
                 playing
-                  ? require("../../../assets/images/volume-on.svg")
-                  : require("../../../assets/images/volume-off.svg")
+                  ? require("../../assets/images/volume-on.svg")
+                  : require("../../assets/images/volume-off.svg")
               }
             />
           </Pressable>

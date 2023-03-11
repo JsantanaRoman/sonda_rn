@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Spacing, Colors } from "../../styles";
-import { FONT_WEIGHT_REGULAR } from "../../styles/typography";
+import { Colors, Spacing, Typography } from "_styles";
 
 const styles = StyleSheet.create({
   card: {
@@ -14,7 +13,7 @@ const styles = StyleSheet.create({
   },
   cardHeading: {
     fontSize: 40,
-    fontWeight: FONT_WEIGHT_REGULAR,
+    fontWeight: Typography.FONT_WEIGHT_REGULAR,
     color: Colors.WHITE,
     paddingVertical: Spacing.SCALE_8,
     paddingHorizontal: Spacing.SCALE_16,
@@ -59,7 +58,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
     opacity: 0.8,
     backgroundColor: Colors.BLACK,
-    tintColor: "red",
     height: 125,
     width: "100%",
     borderRadius: 12,

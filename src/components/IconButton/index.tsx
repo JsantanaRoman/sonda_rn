@@ -1,5 +1,5 @@
-import { Pressable, ViewStyle } from "react-native";
 import { Image, ImageContentFit, ImageSource, ImageStyle } from "expo-image";
+import { Pressable, ViewStyle } from "react-native";
 
 export type Props = {
   iconPath: ImageSource;

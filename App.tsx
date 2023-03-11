@@ -1,7 +1,7 @@
 import { Audio } from "expo-av";
 import { Provider } from "react-redux";
-import { store } from "./src/store/";
-import HomeScreen from "./src/screens/home";
+import { HomeScreen } from "_screens";
+import { store } from "_store";
 
 const App = () => {
   // TODO: Create Global Config File
