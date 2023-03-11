@@ -16,7 +16,6 @@ const HomeScreen = () => {
 
   const handlePress = () => {
     dispatch(setPlayAll(!playAll));
-    console.log("PlayAll: ", playAll);
   };
 
   return (

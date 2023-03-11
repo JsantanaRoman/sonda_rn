@@ -25,7 +25,7 @@ const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
 
   const loadAudio = async () => {
     await sound.current.loadAsync(soundPath);
-    sound.current.setStatusAsync({ volume: 0 });
+    await sound.current.setStatusAsync({ volume: 0 });
   };
 
   const playAudio = async () => {

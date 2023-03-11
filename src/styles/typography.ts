@@ -1,12 +1,12 @@
-import { scaleFont } from './mixins';
+import { scaleFont } from "./mixins";
 
 // FONT FAMILY
-export const FONT_FAMILY_REGULAR = 'OpenSans-Regular';
-export const FONT_FAMILY_BOLD = 'OpenSans-Bold';
+export const FONT_FAMILY_REGULAR = "AtHauss-Regular";
+export const FONT_FAMILY_BOLD = "AtHauss-Medium";
 
 // FONT WEIGHT
-export const FONT_WEIGHT_REGULAR = '400';
-export const FONT_WEIGHT_BOLD = '700';
+export const FONT_WEIGHT_REGULAR = "400";
+export const FONT_WEIGHT_BOLD = "700";
 
 // FONT SIZE
 export const FONT_SIZE_16 = scaleFont(16);
