@@ -59,7 +59,11 @@ const HomeScreen = () => {
         })}
       </ScrollView>
       <IconButton
-        iconPath={require("../../assets/images/play.svg")}
+        iconPath={
+          !playAll
+            ? require("../../assets/images/play.svg")
+            : require("../../assets/images/pause.svg")
+        }
         containerStyle={styles.playButtonContainer}
         iconStyle={styles.playButton}
         contentFit={"contain"}

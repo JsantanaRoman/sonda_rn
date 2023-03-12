@@ -4,7 +4,9 @@ import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import { useEffect, useRef, useState } from "react";
 import { Pressable, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import { Colors } from "_styles";
+import { RootState } from "../../store";
 import styles from "./styles";
 
 export type Props = {
@@ -15,13 +17,26 @@ export type Props = {
 };
 
 const SoundCard: React.FC<Props> = ({ name, available, soundPath }) => {
+  const [isloaded, setIsLoaded] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0);
   const sound = useRef(new Audio.Sound());
+  const { playAll } = useSelector((state: RootState) => state.playAll);
 
   useEffect(() => {
-    loadAudio();
-  }, []);
+    if (!isloaded) {
+      loadAudio();
+      setIsLoaded(true);
+    }
+
+    if (volume > 0 && playAll) {
+      playAudio();
+    }
+
+    if (volume > 0 && !playAll) {
+      pauseAudio();
+    }
+  }, [playAll]);
 
   const loadAudio = async () => {
     await sound.current.loadAsync(soundPath);
