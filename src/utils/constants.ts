@@ -40,3 +40,36 @@ export const SoundList = [
     available: false,
   },
 ];
+
+export const PlaylistList = [
+  {
+    name: "Playa en verano",
+  },
+  {
+    name: "Noche lluviosa",
+  },
+  {
+    name: "Coquito y parranda",
+  },
+  {
+    name: "Tarde en El Yunque",
+  },
+  {
+    name: "Mi Viejo San Juan",
+  },
+  {
+    name: "De Camping",
+  },
+  {
+    name: "Coquito y parranda",
+  },
+  {
+    name: "Coquito y parranda",
+  },
+  {
+    name: "Coquito y parranda",
+  },
+  {
+    name: "Coquito y parranda",
+  },
+];

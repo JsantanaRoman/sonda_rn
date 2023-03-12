@@ -3,7 +3,7 @@ import { Platform, StyleSheet, View } from "react-native";
 import { Colors, Spacing } from "_styles";
 import * as Haptics from "expo-haptics";
 import { IconButton } from "../src/components";
-
+// TODO Move app initialization to this File, then call routes, then call initial route as app.jsx
 export default function Layout() {
   const router = useRouter();
 
