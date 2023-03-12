@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { ScrollView, View } from "react-native";
+import { FlatList, SafeAreaView, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { IconButton, SoundCard } from "_components";
 import { RootState } from "_store";
@@ -19,18 +19,20 @@ const HomeScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor={Colors.BLACK} style="light" />
-      <ScrollView style={styles.container}>
-        {Constants.SoundList.map((prop, key) => {
-          return (
+      <SafeAreaView style={{ backgroundColor: Colors.BLACK }}>
+        <FlatList
+          style={styles.container}
+          data={Constants.SoundList}
+          renderItem={({ item, index }) => (
             <SoundCard
-              name={prop.name}
-              key={key}
-              soundPath={prop.soundPath}
-              available={prop.available}
+              name={item.name}
+              key={index}
+              soundPath={item.soundPath}
+              available={item.available}
             />
-          );
-        })}
-      </ScrollView>
+          )}
+        />
+      </SafeAreaView>
       <IconButton
         iconPath={
           !playAll

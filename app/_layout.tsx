@@ -1,6 +1,6 @@
 import { Stack, useRouter } from "expo-router";
 import { Platform, StyleSheet, View } from "react-native";
-import { Spacing } from "_styles";
+import { Colors, Spacing } from "_styles";
 import * as Haptics from "expo-haptics";
 import { IconButton } from "../src/components";
 
@@ -15,7 +15,7 @@ export default function Layout() {
         headerStyle:
           Platform.OS !== "ios"
             ? {
-                backgroundColor: "#000000",
+                backgroundColor: Colors.BLACK,
               }
             : {},
         headerTitle: "",
