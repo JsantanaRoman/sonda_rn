@@ -1,11 +1,44 @@
+import { Audio } from "expo-av";
+import * as Fonts from "expo-font";
+import * as Haptics from "expo-haptics";
 import { Stack, useRouter } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Colors, Spacing } from "_styles";
-import * as Haptics from "expo-haptics";
 import { IconButton } from "../src/components";
-// TODO Move app initialization to this File, then call routes, then call initial route as app.jsx
+
+let customFonts = {
+  "AtHauss-Regular": require("./../src/assets/fonts/AtHaussStd-Retina.otf"),
+  "AtHauss-Medium": require("./../src/assets/fonts/AtHaussStd-Medium.otf"),
+  "AtHauss-Super": require("./../src/assets/fonts/AtHaussStd-Super.otf"),
+};
+
+SplashScreen.preventAutoHideAsync();
+
 export default function Layout() {
+  const [initialize, setinitialize] = useState(false);
   const router = useRouter();
+
+  const initializeApp = async () => {
+    try {
+      await Fonts.loadAsync(customFonts);
+      Audio.requestPermissionsAsync();
+      Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+      setinitialize(true);
+      if (initialize) {
+        SplashScreen.hideAsync();
+      }
+
+      if (!initialize) {
+        return null;
+      }
+    } catch (error) {
+      console.log("Initialization Error:", error);
+    }
+  };
+
+  initializeApp();
 
   return (
     <Stack
@@ -45,6 +78,7 @@ export default function Layout() {
               iconStyle={[styles.headerIcons, { marginLeft: Spacing.SCALE_24 }]}
               contentFit={"contain"}
               onPress={() => {
+                router.push("/settings");
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               }}
             />
@@ -54,6 +88,13 @@ export default function Layout() {
     >
       <Stack.Screen
         name="playlists"
+        options={{
+          presentation: "modal",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="settings"
         options={{
           presentation: "modal",
           headerShown: false,

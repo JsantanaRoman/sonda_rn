@@ -4,4 +4,4 @@ const Playlist = () => {
   return <PlaylistsScreen />;
 };
 
-export default PlaylistsScreen;
+export default Playlist;
