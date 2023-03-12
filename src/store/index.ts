@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import playAllReducer from "./playAll";
+import playAllReducer from "./slices/playAll";
+import membershipSelectedReducer from "./slices/membershipSelected";
 
 export const store = configureStore({
   reducer: {
     playAll: playAllReducer,
+    membershipSelected: membershipSelectedReducer,
   },
 });
 

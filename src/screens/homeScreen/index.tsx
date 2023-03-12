@@ -3,9 +3,9 @@ import { FlatList, SafeAreaView, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { IconButton, SoundCard } from "_components";
 import { RootState } from "_store";
-import { Colors, Spacing } from "_styles";
+import { Colors } from "_styles";
 import { Constants } from "_utils";
-import { setPlayAll } from "../../store/playAll";
+import { setPlayAll } from "../../store/slices/playAll";
 import styles from "./style";
 
 const HomeScreen = () => {

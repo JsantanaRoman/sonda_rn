@@ -1,8 +1,8 @@
 import { useRouter } from "expo-router";
 import { FlatList, Text, View } from "react-native";
-import { IconButton } from "../../components";
-import PlaylistCard from "../../components/PlaylistCard";
-import { Constants } from "../../utils";
+import { IconButton } from "_components";
+import { PlaylistCard } from "_components";
+import { Constants } from "_utils";
 import styles from "./style";
 
 const PlaylistsScreen = () => {
