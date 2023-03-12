@@ -26,8 +26,10 @@
         "backgroundColor": "#000000"
       }
     },
+    "scheme": "myapp",
+
     "web": {
-      "favicon": "./src/assets/images/icon.png"
+      "bundler": "metro"
     },
     "extra": {
       "eas": {

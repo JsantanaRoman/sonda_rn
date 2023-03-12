@@ -7,9 +7,9 @@ import { HomeScreen } from "_screens";
 import { store } from "_store";
 
 let customFonts = {
-  "AtHauss-Regular": require("./src/assets/fonts/AtHaussStd-Retina.otf"),
-  "AtHauss-Medium": require("./src/assets/fonts/AtHaussStd-Medium.otf"),
-  "AtHauss-Super": require("./src/assets/fonts/AtHaussStd-Super.otf"),
+  "AtHauss-Regular": require("./../src/assets/fonts/AtHaussStd-Retina.otf"),
+  "AtHauss-Medium": require("./../src/assets/fonts/AtHaussStd-Medium.otf"),
+  "AtHauss-Super": require("./../src/assets/fonts/AtHaussStd-Super.otf"),
 };
 
 SplashScreen.preventAutoHideAsync();
