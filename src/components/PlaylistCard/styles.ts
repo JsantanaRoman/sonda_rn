@@ -1,10 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Colors, Spacing } from "_styles";
-import {
-  FONT_FAMILY_BOLD,
-  FONT_FAMILY_REGULAR,
-  FONT_WEIGHT_BOLD,
-} from "../../styles/typography";
+import { FONT_FAMILY_BOLD, FONT_WEIGHT_BOLD } from "../../styles/typography";
 
 const styles = StyleSheet.create({
   playlistCard: {
