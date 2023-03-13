@@ -1,6 +1,11 @@
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
-import { IconButton, MembershipPicker, SondaPlusText } from "_components";
+import {
+  IconButton,
+  ListItem,
+  MembershipPicker,
+  SondaPlusText,
+} from "_components";
 import styles from "./style";
 
 const SettingsScreen = () => {
@@ -22,6 +27,14 @@ const SettingsScreen = () => {
       <View style={styles.contentContainer}>
         <SondaPlusText />
         <MembershipPicker />
+        <ListItem
+          text="Restore purchase"
+          iconPath={require("../../assets/images/money.svg")}
+        />
+        <ListItem
+          text="See Features"
+          iconPath={require("../../assets/images/stars.svg")}
+        />
       </View>
     </View>
   );
