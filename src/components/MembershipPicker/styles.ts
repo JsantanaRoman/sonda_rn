@@ -1,8 +1,14 @@
 import { StyleSheet } from "react-native";
-import { Colors, Spacing } from "_styles";
-import { FONT_FAMILY_BOLD, FONT_FAMILY_REGULAR } from "../../styles/typography";
+import { Colors, Spacing, Typography } from "_styles";
 
 const styles = StyleSheet.create({
+  planCardsContainer: {
+    marginVertical: Spacing.SCALE_16,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   planCard: {
     height: 122,
     width: 174,
@@ -12,7 +18,7 @@ const styles = StyleSheet.create({
     padding: Spacing.SCALE_12,
   },
   planCardPrice: {
-    fontFamily: FONT_FAMILY_BOLD,
+    fontFamily: Typography.FONT_FAMILY_BOLD,
     fontSize: 32,
     lineHeight: 36,
     letterSpacing: -2,
@@ -20,7 +26,7 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.SCALE_12,
   },
   planCardTerm: {
-    fontFamily: FONT_FAMILY_REGULAR,
+    fontFamily: Typography.FONT_FAMILY_REGULAR,
     fontSize: 18,
     lineHeight: 16,
     letterSpacing: -2,
@@ -28,7 +34,7 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
   },
   planCardName: {
-    fontFamily: FONT_FAMILY_REGULAR,
+    fontFamily: Typography.FONT_FAMILY_REGULAR,
     fontSize: 13,
     lineHeight: 14,
     letterSpacing: -2,

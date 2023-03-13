@@ -1,13 +1,9 @@
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { IconButton, SondaPlusText, PlanCard } from "_components";
-import { RootState } from "_store";
+import { IconButton, MembershipPicker, SondaPlusText } from "_components";
 import styles from "./style";
 
 const SettingsScreen = () => {
-  const dispatch = useDispatch();
-  const { playAll } = useSelector((state: RootState) => state.playAll);
   const router = useRouter();
 
   return (
@@ -25,10 +21,7 @@ const SettingsScreen = () => {
       </View>
       <View style={styles.contentContainer}>
         <SondaPlusText />
-        <View style={styles.planCardsContainer}>
-          <PlanCard name={"Supporter"} price={"$13"} term={"Per Year"} />
-          <PlanCard name={"Beliver"} price={"$45"} term={"Lifetime"} />
-        </View>
+        <MembershipPicker />
       </View>
     </View>
   );

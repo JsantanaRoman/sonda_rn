@@ -6,7 +6,9 @@ import * as SplashScreen from "expo-splash-screen";
 import { useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Colors, Spacing } from "_styles";
-import { IconButton } from "../src/components";
+import { IconButton } from "_components";
+import { Provider } from "react-redux";
+import { store } from "_store";
 
 let customFonts = {
   "AtHauss-Regular": require("./../src/assets/fonts/AtHaussStd-Retina.otf"),
@@ -41,66 +43,71 @@ export default function Layout() {
   initializeApp();
 
   return (
-    <Stack
-      screenOptions={{
-        headerTransparent: true,
-        headerBlurEffect: "dark",
-        headerStyle:
-          Platform.OS !== "ios"
-            ? {
-                backgroundColor: Colors.BLACK,
-              }
-            : {},
-        headerTitle: "",
-        headerLeft: () => (
-          <IconButton
-            iconPath={require("../src/assets/images/logo.svg")}
-            iconStyle={styles.headerLogo}
-            contentFit={"contain"}
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            }}
-          />
-        ),
-        headerRight: () => (
-          <View style={styles.headingRight}>
+    <Provider store={store}>
+      <Stack
+        screenOptions={{
+          headerTransparent: true,
+          headerBlurEffect: "dark",
+          headerStyle:
+            Platform.OS !== "ios"
+              ? {
+                  backgroundColor: Colors.BLACK,
+                }
+              : {},
+          headerTitle: "",
+          headerLeft: () => (
             <IconButton
-              iconPath={require("../src/assets/images/hamburger.svg")}
-              iconStyle={styles.headerIcons}
+              iconPath={require("../src/assets/images/logo.svg")}
+              iconStyle={styles.headerLogo}
               contentFit={"contain"}
               onPress={() => {
-                router.push("/playlists");
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               }}
             />
-            <IconButton
-              iconPath={require("../src/assets/images/settings.svg")}
-              iconStyle={[styles.headerIcons, { marginLeft: Spacing.SCALE_24 }]}
-              contentFit={"contain"}
-              onPress={() => {
-                router.push("/settings");
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              }}
-            />
-          </View>
-        ),
-      }}
-    >
-      <Stack.Screen
-        name="playlists"
-        options={{
-          presentation: "modal",
-          headerShown: false,
+          ),
+          headerRight: () => (
+            <View style={styles.headingRight}>
+              <IconButton
+                iconPath={require("../src/assets/images/hamburger.svg")}
+                iconStyle={styles.headerIcons}
+                contentFit={"contain"}
+                onPress={() => {
+                  router.push("/playlists");
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                }}
+              />
+              <IconButton
+                iconPath={require("../src/assets/images/settings.svg")}
+                iconStyle={[
+                  styles.headerIcons,
+                  { marginLeft: Spacing.SCALE_24 },
+                ]}
+                contentFit={"contain"}
+                onPress={() => {
+                  router.push("/settings");
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                }}
+              />
+            </View>
+          ),
         }}
-      />
-      <Stack.Screen
-        name="settings"
-        options={{
-          presentation: "modal",
-          headerShown: false,
-        }}
-      />
-    </Stack>
+      >
+        <Stack.Screen
+          name="playlists"
+          options={{
+            presentation: "modal",
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="settings"
+          options={{
+            presentation: "modal",
+            headerShown: false,
+          }}
+        />
+      </Stack>
+    </Provider>
   );
 }
 
